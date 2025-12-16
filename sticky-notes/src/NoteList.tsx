@@ -1,19 +1,21 @@
-import { Note } from './types';
+import type { Note } from "./types";
 
 interface NoteListProps {
   notes: Note[];
-  onDelete: (id: number) => void; // [cite: 49]
 }
 
-export default function NoteList({ notes, onDelete }: NoteListProps) {
+export default function NoteList({ notes }: NoteListProps) {
   return (
-    <div className="note-list">
-      {notes.map((note) => (
-        <div key={note.id} className="note-item">
-          <span>{note.text}</span>
-          <button onClick={() => onDelete(note.id)}>Delete</button>
-        </div>
-      ))}
+    <div>
+      {notes.length === 0 ? (
+        <p>No notes yet.</p>
+      ) : (
+        <ul>
+          {notes.map((n) => (
+            <li key={n.id}>{n.text}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
